@@ -1,0 +1,197 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap');
+
+.wrapper {
+    display: grid;
+    grid-template-columns: 1fr repeat(11, minmax(auto, 10em)) 1fr;
+    grid-template-rows: minmax(1em, auto) 1fr auto minmax(1em, auto);
+    margin-left: 13.5%;
+    margin-top: 9%;
+}
+
+.main { 
+    grid-column: 1/11;
+    margin-left: 20px;
+    margin-top: -55px;
+    height: 600px;
+}
+
+.card-div {
+    display: flex;
+    flex-direction: column-reverse;
+    color: rgb(88, 96, 105);
+    background-color: rgb(255, 255, 255);
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 10px 30px -15px;
+    padding: 2rem;
+    cursor: pointer;
+    border-radius: 10px;
+    height: 100%;
+    justify-content: center; /* center items vertically, in this case */
+    align-items: center;    }
+
+.background {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+}
+
+.audio-class {
+    display: flex;
+    position: absolute;
+    top: -10;
+    width: 100vw;
+    height: 100vh;
+    z-index: 100;
+}
+
+.label {
+  position: relative;
+  text-align: center;
+  top: -45%;
+  font-size: 40px;
+  font-weight: bold;
+  font-family: 'Source Sans Pro', sans-serif;
+  color: #053768;
+}
+
+.results {
+    position: relative;
+    text-align: center;
+    top: 40%;
+    font-size: 25px;
+    font-weight: bold;
+    font-family: 'Source Sans Pro', sans-serif;
+    color: #053768;
+  }
+  
+.button {
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.8);
+  background: #EF7075;
+  padding: 15px 40px;
+  border-radius: 4px;
+  border-width: 0px;
+  width: 45%;
+  margin-bottom: 100px;
+  font-weight: normal;
+  transition: all 0.2s ease-in-out;
+}
+
+.button:hover {
+  color: rgba(255, 255, 255, 1);
+  box-shadow: 0 5px 15px #EF7075;
+}
+
+.button:focus {
+    outline:0;
+}
+
+.fadeIn{
+    opacity:1;
+    width:100px;
+    height:100px;
+    transition: width 0.5s, height 0.5s, opacity 0.5s 0.5s;
+
+}
+
+@keyframes move_wave {
+    0% {
+        transform: translateX(0) translateZ(0) scaleY(1)
+    }
+    50% {
+        transform: translateX(-25%) translateZ(0) scaleY(0.55)
+    }
+    100% {
+        transform: translateX(-50%) translateZ(0) scaleY(1)
+    }
+}
+
+.waveWrapper {
+    overflow: hidden;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    margin: -600px;
+    margin: auto;
+}
+
+.waveWrapperInner {
+    position: absolute;
+    width: 100%;
+    overflow: hidden;
+    height: 50%;
+    bottom: 50%;
+    background-image: linear-gradient(to top, #EF7075 20%, #EF7075 80%);
+}
+
+.bgTop {
+    z-index: 15;
+    opacity: 0.5;
+}
+
+.bgMiddle {
+    z-index: 10;
+    opacity: 0.75;
+}
+
+.bgBottom {
+    z-index: 5;
+}
+
+.wave {
+    position: absolute;
+    left: 0;
+    width: 200%;
+    height: 100%;
+    background-repeat: repeat no-repeat;
+    background-position: 0 bottom;
+    transform-origin: center bottom;
+}
+
+.waveTop {
+    background-size: 50% 100px;
+}
+
+.waveAnimation .waveTop {
+  animation: move-wave 3s;
+   -webkit-animation: move-wave 3s;
+   -webkit-animation-delay: 1s;
+   animation-delay: 1s;
+}
+
+.waveMiddle {
+    background-size: 50% 120px;
+}
+
+.waveAnimation .waveMiddle {
+    animation: move_wave 10s linear infinite;
+}
+
+.waveBottom {
+    background-size: 50% 100px;
+}
+
+.waveAnimation .waveBottom {
+    animation: move_wave 15s linear infinite;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
