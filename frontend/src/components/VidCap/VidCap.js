@@ -3,12 +3,13 @@ import './VidCap.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 import TextTransition, { presets } from "react-text-transition";
+import ReactPlayer from 'react-player'
 
 class VidCap extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {result: ""};
+    this.state = {result: "", file: ""};
   }
 
   onChangeFile(event) {
@@ -20,6 +21,7 @@ class VidCap extends Component {
 
       var formData = new FormData();
       formData.append("file", file);
+      this.setState({file: URL.createObjectURL(file)})
       formData.append("beam_index", "3");
       axios.post('http://localhost:5000/success', formData, {
         headers: {
@@ -60,7 +62,14 @@ class VidCap extends Component {
                     style={{display: 'none'}}
                     onChange={this.onChangeFile.bind(this)}
                     />
-                    <button className="button" onClick={()=>{this.upload.click()}}>Upload a video (.mp4, .avi)</button>
+                    <button className="button" onClick={()=>{this.upload.click();this.setState({result: ""})}}>Upload a video (.mp4, .avi)</button>
+                    <ReactPlayer
+                      className='react-player video'
+                      url= {this.state.file}
+                      width='30%'
+                      height='30%'
+                      controls = {true}
+                    />
                     <TextTransition className="results"
                       text={ this.state.result }
                       springConfig={ presets.wobbly }
