@@ -50,7 +50,7 @@ class VidCap extends Component {
               </div>
             </div>
           <div>
-          <div className="audio-class">
+          <div className="cap-class">
             <div className="wrapper">
               <div className="main">
                 <div className="card-div">
