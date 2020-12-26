@@ -17,16 +17,16 @@
 
 .card-div {
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
     color: rgb(88, 96, 105);
     background-color: rgb(255, 255, 255);
     box-shadow: rgba(0, 0, 0, 0.2) 0px 10px 30px -15px;
     padding: 2rem;
-    cursor: pointer;
     border-radius: 10px;
     height: 100%;
-    justify-content: center; /* center items vertically, in this case */
-    align-items: center;    }
+    justify-content: center;
+    align-items: center;    
+}
 
 .background {
     display: flex;
@@ -45,18 +45,32 @@
 
 .label {
     position: relative;
+    margin-top: 30px;
+    margin-bottom: 20px;
     text-align: center;
-    bottom: 80%;
     font-size: 40px;
     font-weight: bold;
     font-family: 'Source Sans Pro', sans-serif;
     color: #053768;
 }
 
+.button {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.8);
+    background: #EF7075;
+    padding: 15px 15px;
+    border-radius: 4px;
+    border-width: 0px;
+    margin-bottom: 30px;
+    width: 45%;
+    font-weight: normal;
+    transition: all 0.2s ease-in-out;
+}
+
 .video {
     position: relative;
+    margin-bottom: 20px;
     text-align: center;
-    top: 47%;
     font-size: 25px;
     font-weight: bold;
     font-family: 'Source Sans Pro', sans-serif;
@@ -65,23 +79,25 @@
 
 .results {
     position: relative;
+    margin-bottom: 30px;
     text-align: center;
-    top: 90%;
     font-size: 25px;
     font-weight: bold;
     font-family: 'Source Sans Pro', sans-serif;
     color: #053768;
   }
   
-.button {
+.buttonD {
+    position: relative;
+    margin-bottom: 20px;
     text-decoration: none;
     color: rgba(255, 255, 255, 0.8);
-    background: #EF7075;
+    background: #D6D6D6;
     padding: 15px 40px;
     border-radius: 4px;
     border-width: 0px;
-    width: 45%;
-    margin-bottom: 30%;
+    width: 25%;
+    height: 55px;
     font-weight: normal;
     transition: all 0.2s ease-in-out;
 }
@@ -91,7 +107,12 @@
     box-shadow: 0 5px 15px #EF7075;
 }
 
-.button:focus {
+.buttonD:hover {
+    color: rgba(255, 255, 255, 1);
+    box-shadow: 0 5px 15px #D6D6D6;
+}
+
+.button:focus, .buttonD:focus {
     outline:0;
 }
 

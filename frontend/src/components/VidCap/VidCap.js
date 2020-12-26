@@ -9,7 +9,7 @@ class VidCap extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {result: "", file: ""};
+    this.state = {result: "", file: "", showDetes: false};
   }
 
   onChangeFile(event) {
@@ -63,17 +63,21 @@ class VidCap extends Component {
                     onChange={this.onChangeFile.bind(this)}
                     />
                     <button className="button" onClick={()=>{this.upload.click();this.setState({result: ""})}}>Upload a video (.mp4, .avi)</button>
-                    <ReactPlayer
+                    {/* <ReactPlayer
                       className='react-player video'
                       url= {this.state.file}
                       width='30%'
                       height='30%'
                       controls = {true}
-                    />
+                    /> */}
                     <TextTransition className="results"
                       text={ this.state.result }
                       springConfig={ presets.wobbly }
-                    />               
+                    />
+                    {this.state.result && this.state.result != "Generating Caption!"? 
+                      <button className="buttonD" >Show Details</button> 
+                      : null
+                    }
                   </div>
                 </div>
               </div>
