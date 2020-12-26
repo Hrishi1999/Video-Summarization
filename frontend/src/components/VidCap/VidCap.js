@@ -9,27 +9,28 @@ class VidCap extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {result: "", file: "", showDetes: false};
+    this.state = {caption: "", file: "", showDetes: false, bforce: "", beam_op: {}};
   }
 
   onChangeFile(event) {
       event.stopPropagation();
       event.preventDefault();
       var file = event.target.files[0];
+      var beam_index = 3;
       console.log(file);
-      this.setState({result: "Generating Caption!"})
+      this.setState({caption: "Generating Caption!"})
 
       var formData = new FormData();
       formData.append("file", file);
       this.setState({file: URL.createObjectURL(file)})
-      formData.append("beam_index", "3");
+      formData.append("beam_index", beam_index);
       axios.post('http://localhost:5000/success', formData, {
         headers: {
         'Content-Type': 'multipart/form-data'
       }})
         .then(res => {
             console.log({res});
-            this.setState({result: res.data.beam_search_3.caption})
+            this.setState({caption: res.data.beam_search_3.caption, bforce: res.data.brute_force.caption, beam_op: res.data.beam_search_3})
         }).catch(err => {
             console.error({err});
         });
@@ -51,36 +52,55 @@ class VidCap extends Component {
             </div>
           <div>
           <div className="cap-class">
-            <div className="wrapper">
-              <div className="main">
-                <div className="card-div">
-                  <h1 className="label">{"Video Summarization"}</h1>
-                  <input id="myInput"
-                    style={{display: "none"}}
-                    type="file"
-                    ref={(ref) => this.upload = ref}
-                    style={{display: 'none'}}
-                    onChange={this.onChangeFile.bind(this)}
-                    />
-                    <button className="button" onClick={()=>{this.upload.click();this.setState({result: ""})}}>Upload a video (.mp4, .avi)</button>
-                    {/* <ReactPlayer
+            {!this.state.showDetes ? 
+              <div className="wrapper">
+                <div className="main">
+                  <div className="card-div">
+                    <h1 className="label">{"Video Summarization"}</h1>
+                    <input id="myInput"
+                      style={{display: "none"}}
+                      type="file"
+                      ref={(ref) => this.upload = ref}
+                      style={{display: 'none'}}
+                      onChange={this.onChangeFile.bind(this)}
+                      />
+                      <button className="button" onClick={()=>{this.upload.click();this.setState({caption: ""})}}>Upload a video (.mp4, .avi)</button>
+                      <TextTransition className="results"
+                        text={ this.state.caption }
+                        springConfig={ presets.wobbly }
+                      />
+                      {this.state.caption && this.state.caption !== "Generating Caption!"? 
+                        <button className="buttonD" onClick={()=>{this.setState({showDetes: !this.state.showDetes})}}>Show Details</button> 
+                        : null
+                      }
+                  </div>
+                </div>
+              </div>
+              : 
+              <div className="wrapper">
+                <div className="details">
+                  <div className="card-div">
+                    <h4 className="details-label">{"Details"}</h4>
+                    <ReactPlayer
                       className='react-player video'
                       url= {this.state.file}
                       width='30%'
                       height='30%'
                       controls = {true}
-                    /> */}
-                    <TextTransition className="results"
-                      text={ this.state.result }
-                      springConfig={ presets.wobbly }
                     />
-                    {this.state.result && this.state.result != "Generating Caption!"? 
-                      <button className="buttonD" >Show Details</button> 
+                    {Object.keys(this.state.beam_op).map((item, i) => <img className="image" src={item}/>)}
+                    {/* <TextTransition className="results-details" style={{float: "right"}}
+                      text={ this.state.caption }
+                      springConfig={ presets.wobbly }
+                    /> */}
+                    {this.state.caption && this.state.caption !== "Generating Caption!"? 
+                      <button className="buttonD" onClick={()=>{this.setState({showDetes: !this.state.showDetes})}}>Go Back</button> 
                       : null
                     }
                   </div>
                 </div>
-              </div>
+              </div>}
+            
             </div>
           </div>
         </div>

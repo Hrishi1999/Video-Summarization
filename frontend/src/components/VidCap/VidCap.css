@@ -16,6 +16,27 @@
     height: 600px;
 }
 
+.details { 
+    position: absolute;
+    width: 700px;
+    top: 58%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    margin-top: -55px;
+    height: 600px;
+}
+
+.image {
+    height: 100px;
+    width: 150px;
+}
+
+.video-div {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap
+}
+
 .card-div {
     display: flex;
     flex-direction: column;
@@ -55,6 +76,28 @@
     color: #053768;
 }
 
+.label {
+    position: relative;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 40px;
+    font-weight: bold;
+    font-family: 'Source Sans Pro', sans-serif;
+    color: #053768;
+}
+
+.details-label {
+    position: relative;
+    margin-top: 0px;
+    margin-bottom: 10px;
+    text-align: center;
+    font-size: 25px;
+    font-weight: bold;
+    font-family: 'Source Sans Pro', sans-serif;
+    color: #053768;
+}
+
 .button {
     text-decoration: none;
     color: rgba(255, 255, 255, 0.8);
@@ -86,7 +129,17 @@
     font-weight: bold;
     font-family: 'Source Sans Pro', sans-serif;
     color: #053768;
-  }
+}
+
+.results-details {
+    position: relative;
+    margin-bottom: 30px;
+    text-align: center;
+    font-size: 15px;
+    font-weight: bold;
+    font-family: 'Source Sans Pro', sans-serif;
+    color: #053768;
+}
   
 .buttonD {
     position: relative;
