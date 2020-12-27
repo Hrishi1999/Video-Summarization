@@ -16,7 +16,7 @@ class VidCap extends Component {
       event.stopPropagation();
       event.preventDefault();
       var file = event.target.files[0];
-      var beam_index = 7;
+      var beam_index = 3;
       var beam_kw = "beam_search_" + beam_index;
       console.log(file);
       this.setState({caption: "Generating Caption!"})
