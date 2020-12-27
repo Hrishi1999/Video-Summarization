@@ -16,7 +16,8 @@ class VidCap extends Component {
       event.stopPropagation();
       event.preventDefault();
       var file = event.target.files[0];
-      var beam_index = 3;
+      var beam_index = 7;
+      var beam_kw = "beam_search_" + beam_index;
       console.log(file);
       this.setState({caption: "Generating Caption!"})
 
@@ -30,10 +31,18 @@ class VidCap extends Component {
       }})
         .then(res => {
             console.log({res});
-            this.setState({caption: res.data.beam_search_3.caption, bforce: res.data.brute_force.caption, beam_op: res.data.beam_search_3})
+            this.setState({caption: res.data.beam_search_caption, bforce: res.data.brute_force_caption, beam_op: res.data[beam_kw]})
         }).catch(err => {
             console.error({err});
         });
+  }
+
+  listComponent(url, caption) {
+    console.log(url);
+    return (<div className="item-div">
+              <img className="image" src={url} style={{float: "left"}}/>
+              <h5 className="caption-text" style={{float: "right", verticalAlign: "middle"}}>{caption}</h5>
+            </div>)
   }
     
   render() {
@@ -88,7 +97,9 @@ class VidCap extends Component {
                       height='30%'
                       controls = {true}
                     />
-                    {Object.keys(this.state.beam_op).map((item, i) => <img className="image" src={item}/>)}
+                    <div className="capt-container">
+                      {Object.entries(this.state.beam_op).map(([key,value]) => this.listComponent(key, value))}
+                    </div>
                     {/* <TextTransition className="results-details" style={{float: "right"}}
                       text={ this.state.caption }
                       springConfig={ presets.wobbly }
