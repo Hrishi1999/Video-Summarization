@@ -1,3 +1,2 @@
 # Video-Summarization
-(Soon)
-Backend Soon!
+(Docs Soon)
