@@ -3,13 +3,13 @@ import './VidCap.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 import TextTransition, { presets } from "react-text-transition";
-import ReactPlayer from 'react-player'
+import ReactPlayer from 'react-player';
 
 class VidCap extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {caption: "", file: "", showDetes: false, bforce: "", beam_op: {}};
+    this.state = {caption: "", file: "", showDetes: false, greedy: "", beam_op: {}};
   }
 
   onChangeFile(event) {
@@ -31,7 +31,7 @@ class VidCap extends Component {
       }})
         .then(res => {
             console.log({res});
-            this.setState({caption: res.data.beam_search_caption, bforce: res.data.brute_force_caption, beam_op: res.data[beam_kw]})
+            this.setState({caption: res.data.beam_search_caption, greedy: res.data.greedy_captiong, beam_op: res.data[beam_kw]})
         }).catch(err => {
             console.error({err});
         });

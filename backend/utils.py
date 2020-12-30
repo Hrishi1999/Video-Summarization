@@ -12,7 +12,7 @@ def load_image(image_path):
     img = tf.keras.applications.inception_v3.preprocess_input(img)
     return img, image_path
 
-def evaluate_brute_force(image):
+def evaluate_greedy(image):
     attention_plot = np.zeros((max_length, attention_features_shape))
 
     hidden = decoder.reset_state(batch_size=1)
@@ -141,13 +141,12 @@ optimizer = tf.keras.optimizers.Adam()
 
 max_length = calc_max_length(train_seqs)
 
-checkpoint_path = "ckpt1024/ckpt20"
+checkpoint_path = "ckpt1024/ckpt6"
 ckpt = tf.train.Checkpoint(encoder=encoder,
                            decoder=decoder,
                            optimizer = optimizer)
 ckpt_manager = tf.train.CheckpointManager(ckpt, checkpoint_path, max_to_keep=5)
 
 if ckpt_manager.latest_checkpoint:
-#   ckpt.restore(ckpt_manager.latest_checkpoint)
-    ckpt.restore('ckpt1024/ckpt20\\ckpt-19')
+  ckpt.restore(ckpt_manager.latest_checkpoint)
 print(ckpt_manager.checkpoints)
