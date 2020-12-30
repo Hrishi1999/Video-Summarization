@@ -1,0 +1,1 @@
+Place the checkpoint files here. You can download my pretrained checkpoints from here:  https://drive.google.com/drive/folders/1aUEPjykLXqI_K70o09fFjreOkSCF8H_l?usp=sharing

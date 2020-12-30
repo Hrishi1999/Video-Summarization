@@ -141,7 +141,7 @@ optimizer = tf.keras.optimizers.Adam()
 
 max_length = calc_max_length(train_seqs)
 
-checkpoint_path = "ckpt1024/ckpt6"
+checkpoint_path = "ckpt"
 ckpt = tf.train.Checkpoint(encoder=encoder,
                            decoder=decoder,
                            optimizer = optimizer)
