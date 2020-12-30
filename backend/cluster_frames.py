@@ -49,7 +49,8 @@ def cluster_frames(input_dir):
     kmodel = KMeans(n_clusters=s_dict[max_k], random_state=728)
     kmodel.fit(pred_images)
     kpredictions = kmodel.predict(pred_images)
-    os.mkdir('output')
+    if not os.path.exists('output'):
+      os.mkdir('output')
     shutil.rmtree('output')
     for i in range(s_dict[max_k]):
     	os.makedirs("output\cluster" + str(i))
