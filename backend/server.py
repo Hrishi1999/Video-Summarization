@@ -10,7 +10,7 @@ from extract_frames import extract_frames
 from cluster_frames import cluster_frames
 from drop_frames import drop_frames
 
-from utils import evaluate_beam_search, evaluate_brute_force
+from utils import evaluate_beam_search, evaluate_greedy
 
 gpus = tf.config.experimental.list_physical_devices('GPU')
 if gpus:
@@ -75,7 +75,7 @@ def success():
             for file in files:
               cd = dir + '\\' + file
               result_b, _ = evaluate_beam_search(cd, beam_index=int(b))
-              result_br, _ = evaluate_brute_force(cd)
+              result_br, _ = evaluate_greedy(cd)
               result_b.pop(0)
               # if len(result_b) <= 10 and len(result_br):
               capts_b[('http://localhost:5000/' + cd).replace('\\', '/')] = ' '.join(result_b)
@@ -89,8 +89,8 @@ def success():
         results['beam_search_' + b] = capts_b
         results['beam_search_caption'] = ', '.join(res_b)
 
-        results['brute_force'] = capts_br
-        results['brute_force_caption'] = ', '.join(res_br)
+        results['greedy'] = capts_br
+        results['greedy_caption'] = ', '.join(res_br)
 
         #os.remove(os.path.join(app.config['UPLOAD_FOLDER'], f.filename))
         return jsonify(results)
