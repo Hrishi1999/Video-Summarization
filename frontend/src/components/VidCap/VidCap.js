@@ -18,7 +18,6 @@ class VidCap extends Component {
       var file = event.target.files[0];
       var beam_index = 3;
       var beam_kw = "beam_search_" + beam_index;
-      console.log(file);
       this.setState({caption: "Generating Caption!"})
 
       var formData = new FormData();
@@ -30,7 +29,7 @@ class VidCap extends Component {
         'Content-Type': 'multipart/form-data'
       }})
         .then(res => {
-            console.log({res});
+            // console.log({res});
             this.setState({caption: res.data.beam_search_caption, greedy: res.data.greedy_captiong, beam_op: res.data[beam_kw]})
         }).catch(err => {
             console.error({err});
