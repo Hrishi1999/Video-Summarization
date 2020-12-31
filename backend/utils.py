@@ -148,4 +148,5 @@ ckpt = tf.train.Checkpoint(encoder=encoder,
 ckpt_manager = tf.train.CheckpointManager(ckpt, checkpoint_path, max_to_keep=5)
 
 if ckpt_manager.latest_checkpoint:
-  ckpt.restore(ckpt_manager.latest_checkpoint)
+#   ckpt.restore(ckpt_manager.latest_checkpoint) # load latest checkpoint
+    ckpt.restore('ckpt/ckpt-10') # load 10th checkpoint

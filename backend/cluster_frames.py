@@ -32,7 +32,7 @@ def cluster_frames(input_dir):
 
     sil = []
     kl = []
-    kmax = 7
+    kmax = 10
     s_dict = {}
 
     for k in range(2, kmax+1):
