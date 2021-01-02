@@ -9,7 +9,7 @@ class VidCap extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {caption: "", file: "", showDetes: false, greedy: "", beam_op: {}, beam_in: ''};
+    this.state = {caption: "", file: "", showDetes: false, greedy: "", beam_op: {}, beam_in: 3};
     this.handleBeamChange = this.handleBeamChange.bind(this);
   }
 
@@ -75,7 +75,7 @@ class VidCap extends Component {
                       style={{display: 'none'}}
                       onChange={this.onChangeFile.bind(this)}
                       />
-                    <input className="beam-input" placeholder="Beam Size" type="text" name="beam_size" onChange={this.handleBeamChange} />
+                    <input className="beam-input" placeholder="Beam Size (default 3)" type="text" name="beam_size" onChange={this.handleBeamChange} />
                     <button className="button" onClick={()=>{this.upload.click();this.setState({caption: ""})}}>Upload a video (.mp4, .avi)</button>
                     <TextTransition className="results"
                       text={ this.state.caption }
