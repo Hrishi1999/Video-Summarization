@@ -9,21 +9,21 @@ class VidCap extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {caption: "", file: "", showDetes: false, greedy: "", beam_op: {}};
+    this.state = {caption: "", file: "", showDetes: false, greedy: "", beam_op: {}, beam_in: ''};
+    this.handleBeamChange = this.handleBeamChange.bind(this);
   }
 
   onChangeFile(event) {
       event.stopPropagation();
       event.preventDefault();
       var file = event.target.files[0];
-      var beam_index = 3;
-      var beam_kw = "beam_search_" + beam_index;
+      var beam_kw = "beam_search_" + this.state.beam_in;
       this.setState({caption: "Generating Caption!"})
 
       var formData = new FormData();
       formData.append("file", file);
       this.setState({file: URL.createObjectURL(file)})
-      formData.append("beam_index", beam_index);
+      formData.append("beam_index", this.state.beam_in);
       axios.post('http://localhost:5000/success', formData, {
         headers: {
         'Content-Type': 'multipart/form-data'
@@ -36,8 +36,11 @@ class VidCap extends Component {
         });
   }
 
+  handleBeamChange(event) {
+    this.setState({beam_in: event.target.value});
+  }
+
   listComponent(url, caption) {
-    console.log(url);
     return (<div className="item-div">
               <img className="image" src={url} style={{float: "left"}}/>
               <h5 className="caption-text" style={{float: "right", verticalAlign: "middle"}}>{caption}</h5>
@@ -72,15 +75,16 @@ class VidCap extends Component {
                       style={{display: 'none'}}
                       onChange={this.onChangeFile.bind(this)}
                       />
-                      <button className="button" onClick={()=>{this.upload.click();this.setState({caption: ""})}}>Upload a video (.mp4, .avi)</button>
-                      <TextTransition className="results"
-                        text={ this.state.caption }
-                        springConfig={ presets.wobbly }
-                      />
-                      {this.state.caption && this.state.caption !== "Generating Caption!"? 
-                        <button className="buttonD" onClick={()=>{this.setState({showDetes: !this.state.showDetes})}}>Show Details</button> 
-                        : null
-                      }
+                    <input className="beam-input" placeholder="Beam Size" type="text" name="beam_size" onChange={this.handleBeamChange} />
+                    <button className="button" onClick={()=>{this.upload.click();this.setState({caption: ""})}}>Upload a video (.mp4, .avi)</button>
+                    <TextTransition className="results"
+                      text={ this.state.caption }
+                      springConfig={ presets.wobbly }
+                    />
+                    {this.state.caption && this.state.caption !== "Generating Caption!"? 
+                      <button className="buttonD" onClick={()=>{this.setState({showDetes: !this.state.showDetes})}}>Show Details</button> 
+                      : null
+                    }
                   </div>
                 </div>
               </div>

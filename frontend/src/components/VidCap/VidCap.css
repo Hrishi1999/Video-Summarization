@@ -124,6 +124,28 @@
     color: #053768;
 }
 
+.beam-input {
+    width: 100px;
+    margin-bottom: 20px;
+    margin-left: 20px;
+    padding: 8px;
+    border: 2px solid #aaa;
+    border-radius: 4px;
+    outline: none;
+    box-sizing: border-box;
+    transition: 0.3s;
+    text-align: center;
+}
+
+.beam-input::placeholder {
+    text-align: center;
+}
+
+.beam-input:focus {
+    border-color: #EF7075;
+    box-shadow: 0 0 8px 0 #EF7075;
+  }
+
 .button {
     text-decoration: none;
     color: rgba(255, 255, 255, 0.8);
