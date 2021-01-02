@@ -13,6 +13,8 @@ This repository is divided into three components. The frontend, which is created
 
 Put the checkpoint files at `backend/ckpt/ckpt6/`. You can change the directory and checkpoint in `backend/utils.py`
 
+Change `UPLOAD_FOLDER` to your desired location in `backend/server.py`
+
 1) Start the backend.
 * `cd backend`
 * `python server.py`
