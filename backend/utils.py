@@ -60,15 +60,13 @@ def evaluate_beam_search(image, beam_index = 10):
 
     dec_input = tf.expand_dims([tokenizer.word_index['<start>']], 0)
 
-    while len(result[0][0]) < max_length:
-        i=0
+    for i in range(max_length):
         temp = []
         for s in result:
 
           predictions, hidden, attention_weights = decoder(dec_input, features, hidden)
 
           attention_plot[i] = tf.reshape(attention_weights, (-1, )).numpy()
-          i=i+1
           # Getting the top <beam_index>(n) predictions
           word_preds = np.argsort(predictions[0])[-beam_index:]
           
