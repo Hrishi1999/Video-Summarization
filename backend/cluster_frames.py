@@ -40,11 +40,8 @@ def cluster_frames(input_dir):
       labels = kmeans2.labels_
       score = silhouette_score(pred_images, labels, metric = 'euclidean')
       s_dict[score] = k
-
-    print(s_dict)
     
     max_k = max(s_dict)
-    print(max_k)
 
     kmodel = KMeans(n_clusters=s_dict[max_k], random_state=728)
     kmodel.fit(pred_images)
