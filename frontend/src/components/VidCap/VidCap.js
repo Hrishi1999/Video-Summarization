@@ -24,7 +24,7 @@ class VidCap extends Component {
       formData.append("file", file);
       this.setState({file: URL.createObjectURL(file)})
       formData.append("beam_index", this.state.beam_in);
-      axios.post('http://localhost:5000/success', formData, {
+      axios.post('http://localhost:5001/success', formData, {
         headers: {
         'Content-Type': 'multipart/form-data'
       }})

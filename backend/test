@@ -1,0 +1,16 @@
+Background Extraction:
+We use a moving average of all frames in the video to approximate the background. 
+As disturbances don't often last throughout the duration of the video, only the background's pixel values 
+are reflected in the final average.
+
+Background Subtraction:
+We use KNN-based background subtraction to identify movement/disturbance in the video and use contours 
+to get bounding-boxes for each item on the background.
+
+Object Tracking:
+We custom-made an Object Tracking algorithm to associate/group these bounding boxes into individual moving objects.
+ We iterate over each frame and for every bounding-box found, we find the nearest, already-existing moving_object. If the found object and the box are both the nearest entities to each-other, they are associated/grouped into the same moving_object. If the box is left alone, it is created as a new moving_object. If a moving_object is left alone(for a few frames), we stop tracking that object for the rest of the video.
+
+Cropping and overlaying moving objects:
+A few filters are applied on the moving objects to refine the output. These objects are now cropped out of the 
+original video and overlaid on the background simultaneously (irrespective of their starting time in the original video) to give an appearance of all these events happening at the same time. Each event's time of occurrence is displayed on top of its moving object. The events are given a slight transparent appearance to deal with overlaps between multiple objects.

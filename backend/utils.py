@@ -1,6 +1,8 @@
 import tensorflow as tf
 import pickle
 import numpy as np
+import matplotlib.pyplot as plt
+from PIL import Image
 
 from model import CNN_Encoder, RNN_Decoder
 
@@ -108,6 +110,22 @@ def evaluate_beam_search(image, beam_index = 10):
 def calc_max_length(tensor):
     return max(len(t) for t in tensor)
 
+def plot_attention(image, result, attention_plot, i):
+    temp_image = np.array(Image.open(image))
+
+    fig = plt.figure(figsize=(10, 10))
+
+    len_result = len(result)
+    for l in range(len_result):
+        temp_att = np.resize(attention_plot[l], (8, 8))
+        ax = fig.add_subplot(len_result//2, len_result//2, l+1)
+        ax.set_title(result[l])
+        img = ax.imshow(temp_image)
+        ax.imshow(temp_att, cmap='gray', alpha=0.45, extent=img.get_extent())
+
+    plt.tight_layout()
+    plt.savefig('test{}.png'.format(i))
+
 image_model = tf.keras.applications.InceptionV3(include_top=False,
                                                 weights='imagenet')
 new_input = image_model.input
@@ -117,8 +135,8 @@ image_features_extract_model = tf.keras.Model(new_input, hidden_layer)
 
 top_k = 10000
 tokenizer = tf.keras.preprocessing.text.Tokenizer(num_words=top_k,
-                                                  oov_token="<unk>",
-                                                  filters='!"#$%&()*+.,-/:;=?@[\]^_`{|}~ ')
+                                                oov_token="<unk>",
+                                                filters='!"#$%&()*+.,-/:;=?@[\]^_`{|}~ ')
 
 pickle_in = open("train_captions_1024.pkl","rb")
 train_captions = pickle.load(pickle_in)

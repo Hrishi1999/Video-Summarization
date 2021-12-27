@@ -53,7 +53,7 @@ def cluster_frames(input_dir):
     	os.makedirs("output\cluster" + str(i))
     for i in range(len(paths)):
     	shutil.copy2(paths[i], "output\cluster"+str(kpredictions[i]))
-    shutil.rmtree('extracted_frames')
+    # shutil.rmtree('extracted_frames')
 
 if __name__ == '__main__':
     cluster_frames('extracted_frames')
